@@ -1,13 +1,20 @@
 #!/bin/bash
-echo "LANG=en_US.UTF-8" > /etc/locale.conf
-touch /etc/hostname
-# Create the /etc/hosts file. This is very important because it will resolve the listed hostnames locally and not over Internet DNS.
-touch /etc/hosts
-#Write the following ip, hostname pairs inside /etc/hosts, replacing Arch with YOUR hostname:
-echo "127.0.0.1 localhost" > /etc/hosts
-echo "::1 localhost" >> /etc/hosts
-echo "127.0.1.1 archlinux" >> /etc/hosts
-echo "archlinux" >> /etc/hostname
+grub-install --target=x86_64-efi --efi-directory=/efi --bootloader-id=GRUB
+grub-mkconfig -o /boot/grub/grub.cfg
+# Enable newtork manager before rebooting otherwise, you won't be able to connect
+systemctl enable NetworkManager
+
+# Exit from chroot
 
 
+# Unmount everything to check if the drive is busy
 
+
+# Reboot the system and unplug the installation media
+
+
+# Now you'll be presented at the terminal. Log in with your user account, for me its "mjkstra".
+
+# Enable and start the time synchronization service
+timedatectl set-ntp true
+umount -R /mnt
